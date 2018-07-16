@@ -27,5 +27,54 @@
         confirm: "Are you sure?"
         }
 ) %>
-</buttom>
+</button>
 
+<h3 class="mt-4"> ✧ Reviews ✧ </h3>
+
+<%= form_for [@idea, @review] do |f| %>
+
+    <% if @review.errors.present? %>
+        <p>
+        <%= @review.errors.full_messages.join(', ') %>
+        </p>
+    <% end %>
+
+    <div class="mb-2">
+        <%= f.text_area(
+            :body, class: "form-control"
+        ) %>
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-outline-primary" %>
+
+<% end %>
+
+<div class="mt-3">
+    <% @reviews.each do |review| %>
+
+        <strong> 
+            <%#=  comment.user&.full_name%>
+        </strong> xxx reviewed: <br />
+
+        <%= review.body %> <br/>
+
+        <small>
+            Reviewed <%= time_ago_in_words(review.created_at) %> ago • 
+        </small>
+        
+        <%# if user_signed_in? && can?(:delete, review) || @post&.user_id == current_user&.id  %>
+            <small>
+                <%= link_to(
+                    "Delete",
+                    idea_review_path(@idea, review),
+                    method: :delete,
+                    data:{
+                        confirm: "Are you sure?"
+                    }
+                    ) %> 
+            </small> 
+        <%# end %>
+        </p>
+
+    <% end %>
+</div>
