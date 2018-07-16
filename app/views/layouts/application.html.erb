@@ -12,23 +12,32 @@
   <body>
 
     <nav class="navbar navbar-expand-sm  navbar-light bg-light mb-2">
-      <a class="navbar-brand" href="/ideas" style="color: blue"> 
-          Idea Factory
-      </a>
+      <a class="navbar-brand" href="/ideas" >Idea Factory</a>
 
       <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse topnav justify-content-end" id="navbarNavAltMarkup">
-          <div class="navbar-nav mr-2">
-          
-            <button type="button" class="nav-link btn btn-outline-primary ml-2" style="color: blue">
-              <%= link_to('New Idea', new_idea_path)%>
-            </button>
+        <div class="navbar-nav mr-2">
+        
+          <% if user_signed_in? %>
+            
+            <a class="nav-link"><%= link_to('New Idea', new_idea_path)%></a>
+            
+            <span style="color: blue; margin-left: 15px;">✧Hello, 
+            <%=current_user.first_name%>
+            ✧
+            </span>
+            
+            <a class="nav-link" ><%= link_to('Sign_Out', session_path, method: :delete)%></a>
+          <% else %>
+            <a class="nav-link"><%= link_to('Sign_In', new_session_path)%></a>
+            
+            <a class="nav-link" ><%= link_to('Sign_Up', new_user_path)%></a>
+          <% end %>
 
-
-          </div>
+        </div>
       </div>
     </nav>
     <div class="yield">

@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
-
+    
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
     before_action :find_idea, only: [:show, :edit, :update, :destroy]
 
 
@@ -11,6 +12,8 @@ class IdeasController < ApplicationController
         # render json: params
 
         @idea = Idea.new ideas_params
+
+        @idea.user = current_user
 
         if @idea.save
             # render json: @idea

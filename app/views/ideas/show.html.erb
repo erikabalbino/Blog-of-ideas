@@ -4,6 +4,7 @@
 
 <p> <%= @idea.description %> </p>
 
+<p>By <%= @idea.user&.full_name %> </p>
 
 <div> 
     <small>
@@ -14,20 +15,22 @@
 
 <br />
 
-<button type="button" class="btn btn-outline-primary">
-    <%= link_to "Edit", edit_idea_path(@idea) %>
-</buttom>
+<% if user_signed_in? %>
+    <button type="button" class="btn btn-outline-primary">
+        <%= link_to "Edit", edit_idea_path(@idea) %>
+    </buttom>
 
-<button type="button" class="btn btn-outline-primary ml-2">
-<%= link_to(
-    "Delete",
-    idea_path(@idea),
-    method: :delete,
-    data: {
-        confirm: "Are you sure?"
-        }
-) %>
-</button>
+    <button type="button" class="btn btn-outline-primary ml-2">
+    <%= link_to(
+        "Delete",
+        idea_path(@idea),
+        method: :delete,
+        data: {
+            confirm: "Are you sure?"
+            }
+    ) %>
+    </button>
+<% end %>
 
 <h3 class="mt-4"> ✧ Reviews ✧ </h3>
 
@@ -53,8 +56,8 @@
     <% @reviews.each do |review| %>
 
         <strong> 
-            <%#=  comment.user&.full_name%>
-        </strong> xxx reviewed: <br />
+            <%=  review.user&.full_name%>
+        </strong> reviewed: <br />
 
         <%= review.body %> <br/>
 
@@ -62,7 +65,7 @@
             Reviewed <%= time_ago_in_words(review.created_at) %> ago • 
         </small>
         
-        <%# if user_signed_in? && can?(:delete, review) || @post&.user_id == current_user&.id  %>
+        <% if user_signed_in? %>
             <small>
                 <%= link_to(
                     "Delete",
@@ -73,7 +76,7 @@
                     }
                     ) %> 
             </small> 
-        <%# end %>
+        <% end %>
         </p>
 
     <% end %>
