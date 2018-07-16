@@ -1,0 +1,12 @@
+<h1  class="mb-4"> ✧ ✧ All Ideas ✧ ✧ </h1>
+<div>
+    <% @ideas.each do |idea| %>
+        <%= link_to(
+        idea.title,
+        idea_path(idea.id),
+        ) %>
+        <br />
+        <p><%= idea.description.truncate(40) %></p>
+        <hr>
+    <% end %>
+</div>

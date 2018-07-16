@@ -10,6 +10,27 @@
   </head>
 
   <body>
+
+    <nav class="navbar navbar-expand-sm  navbar-light bg-light mb-2">
+      <a class="navbar-brand" href="/ideas" style="color: blue"> 
+          Idea Factory
+      </a>
+
+      <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse topnav justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav mr-2">
+          
+            <button type="button" class="nav-link btn btn-outline-primary ml-2" style="color: blue">
+              <%= link_to('New Idea', new_idea_path)%>
+            </button>
+
+
+          </div>
+      </div>
+    </nav>
     <div class="yield">
       <%= yield %>
     </div>

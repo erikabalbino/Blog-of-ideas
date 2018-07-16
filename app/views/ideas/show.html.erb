@@ -1,0 +1,31 @@
+<h1 class="mb-4"> ✧ 😜 ✧ Nice Idea ✧ 😜 ✧ </h1>
+
+<h3> <%= @idea.title %> </h3>
+
+<p> <%= @idea.description %> </p>
+
+
+<div> 
+    <small>
+        Posted <%= time_ago_in_words(@idea.created_at) %> ago
+    </small>
+
+</div>
+
+<br />
+
+<button type="button" class="btn btn-outline-primary">
+    <%= link_to "Edit", edit_idea_path(@idea) %>
+</buttom>
+
+<button type="button" class="btn btn-outline-primary ml-2">
+<%= link_to(
+    "Delete",
+    idea_path(@idea),
+    method: :delete,
+    data: {
+        confirm: "Are you sure?"
+        }
+) %>
+</buttom>
+
