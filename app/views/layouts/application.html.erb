@@ -12,7 +12,7 @@
   <body>
 
     <nav class="navbar navbar-expand-sm  navbar-light bg-light mb-2">
-      <a class="navbar-brand" href="/ideas" >Idea Factory</a>
+      <a class="navbar-brand" style="color: blue" href="/ideas" >Idea Factory</a>
 
       <button class="navbar-toggler"  type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -40,6 +40,13 @@
         </div>
       </div>
     </nav>
+
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= type %>" alert-dismissible fade show>
+        <%= message %>
+      </div>
+    <% end %>
+    
     <div class="yield">
       <%= yield %>
     </div>

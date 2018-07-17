@@ -3,7 +3,11 @@
     <% @ideas.each do |idea| %>
         <h5><%=idea.title%></h5>
         <p><%= idea.description %></p>
-        <p>By <%= idea.user&.full_name %> </p>
+        <p>By <%= link_to(
+            idea.user&.full_name,
+            idea_path(idea.id)
+            ) %> 
+        </p>
         <hr>
     <% end %>
 </div>
