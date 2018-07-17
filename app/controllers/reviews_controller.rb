@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 
     before_action :authenticate_user!, only: [:destroy]
+    before_action :authorize_user!, only: [:destroy]
 
     def create
         # render json: params
@@ -27,8 +28,17 @@ class ReviewsController < ApplicationController
     end
 
     private
-
     def review_params
         params.require(:review).permit(:body)
+    end
+
+    def authorize_user!
+        @review = Review.find params[:id]
+        @idea = Idea.find params[:idea_id]
+
+        unless can?(:manage, @review)
+            flash[:danger] = "Access Denied!"
+            redirect_to idea_path(@review.Idea)
+        end
     end
 end

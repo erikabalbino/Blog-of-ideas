@@ -16,20 +16,24 @@
 <br />
 
 <% if user_signed_in? %>
-    <button type="button" class="btn btn-outline-primary">
-        <%= link_to "Edit", edit_idea_path(@idea) %>
-    </buttom>
+    <% if can?(:edit, @idea) %>
+        <button type="button" class="btn btn-outline-primary">
+            <%= link_to "Edit", edit_idea_path(@idea) %>
+        </buttom>
+    <% end %>
 
-    <button type="button" class="btn btn-outline-primary ml-2">
-    <%= link_to(
-        "Delete",
-        idea_path(@idea),
-        method: :delete,
-        data: {
-            confirm: "Are you sure?"
-            }
-    ) %>
-    </button>
+    <% if can?(:delete, @idea) %>
+        <button type="button" class="btn btn-outline-primary ml-2">
+        <%= link_to(
+            "Delete",
+            idea_path(@idea),
+            method: :delete,
+            data: {
+                confirm: "Are you sure?"
+                }
+        ) %>
+        </button>
+    <% end %>
 <% end %>
 
 <h3 class="mt-4"> ✧ Reviews ✧ </h3>
@@ -65,7 +69,7 @@
             Reviewed <%= time_ago_in_words(review.created_at) %> ago • 
         </small>
         
-        <% if user_signed_in? %>
+        <% if user_signed_in? && can?(:delete, review) %>
             <small>
                 <%= link_to(
                     "Delete",

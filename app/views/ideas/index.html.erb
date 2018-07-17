@@ -1,12 +1,9 @@
 <h1  class="mb-4"> ✧ ✧ All Ideas ✧ ✧ </h1>
 <div>
     <% @ideas.each do |idea| %>
-        <%= link_to(
-        idea.title,
-        idea_path(idea.id),
-        ) %>
-        <br />
+        <h5><%=idea.title%></h5>
         <p><%= idea.description %></p>
+        <p>By <%= idea.user&.full_name %> </p>
         <hr>
     <% end %>
 </div>
