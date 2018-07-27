@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create, :destroy]
   end
 
+  get('/', {to: 'ideas#index', as: 'home'})
 end
